@@ -29,8 +29,8 @@ const EmployeesPage = () => {
     const fetchTeamsAndProjects = async () => {
       try {
         const [teamsResponse, projectsResponse] = await Promise.all([
-          axios.get("http://localhost:8080/api/get-teams"), // Adjust endpoint
-          axios.get("http://localhost:8080/api/projects"), // Adjust endpoint
+          axios.get("https://rhythm-forge-api.vercel.app/api/get-teams"), // Adjust endpoint
+          axios.get("https://rhythm-forge-api.vercel.app/api/projects"), // Adjust endpoint
         ]);
         console.log("Projects Response:", projectsResponse.data);
 
@@ -52,7 +52,7 @@ const EmployeesPage = () => {
   // Fetch employees from the backend
   // const fetchEmployees = async () => {
   //   try {
-  //     const response = await axios.get("http://localhost:8080/api/employees");
+  //     const response = await axios.get("https://rhythm-forge-api.vercel.app/api/employees");
   //     setEmployees(response.data);
   //     setLoading(false);
   //   } catch (error) {
@@ -63,7 +63,7 @@ const EmployeesPage = () => {
    // Fetch members from the backend
    const fetchMembers = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/users");
+      const response = await axios.get("https://rhythm-forge-api.vercel.app/api/users");
       console.log("Members Response:", response.data); // Log the response
   
       // Ensure the response is an array (check for 'users' array)
@@ -86,7 +86,7 @@ const EmployeesPage = () => {
   // const handleCreateEmloyee = async (e) => {
   //   e.preventDefault();
   //   try {
-  //     const response = await axios.post("http://localhost:8080/api/employees/create", formData);
+  //     const response = await axios.post("https://rhythm-forge-api.vercel.app/api/employees/create", formData);
   //     alert(response.data.message);
   //     setFormData({ name: "", email: "", role: "" }); // Reset form
   //     setEmployees((prev) => [...prev, response.data.employee]); // Add new employee to list
@@ -123,7 +123,7 @@ const handleCreateUser = async (e) => {
   console.log("User Form Data to be sent:", userFormData);
 
   try {
-    const response = await axios.post("http://localhost:8080/api/users", userFormData, {
+    const response = await axios.post("https://rhythm-forge-api.vercel.app/api/users", userFormData, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -180,7 +180,7 @@ const handleCreateUser = async (e) => {
 //       console.log("Assigning Payload:", payload);
   
 //       const response = await axios.patch(
-//         `http://localhost:8080/api/employees/${employeeId}/assign`,
+//         `https://rhythm-forge-api.vercel.app/api/employees/${employeeId}/assign`,
 //         payload
 //       );
   
@@ -217,7 +217,7 @@ const handleCreateUser = async (e) => {
   
       // Make the API call to assign teams and projects to the user
       const response = await axios.put(
-        `http://localhost:8080/api/users/${userId}/assign`,
+        `https://rhythm-forge-api.vercel.app/api/users/${userId}/assign`,
         payload
       );
   
