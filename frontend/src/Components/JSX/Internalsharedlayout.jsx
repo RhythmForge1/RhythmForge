@@ -32,7 +32,7 @@ const Internalsharedlayout = () => {
     useEffect(() => {
         const fetchProjectCodes = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/projects');
+                const response = await fetch('https://rhythm-forge-api.vercel.app/api/projects');
                 const data = await response.json();
                 if (Array.isArray(data)) {
                     const codes = data.map((project) => project.projectCode);
@@ -79,7 +79,7 @@ const Internalsharedlayout = () => {
                 formDetails.append(key, value);
             });
 
-            await axios.post("http://localhost:8080/api/escalation", formDetails, {
+            await axios.post("https://rhythm-forge-api.vercel.app/api/escalation", formDetails, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 

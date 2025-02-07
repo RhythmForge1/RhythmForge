@@ -23,7 +23,7 @@ const Deliverables = () => {
     // Fetch all deliverables data from the backend
     const fetchDeliverables = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/deliverables"); // API endpoint for all deliverables
+        const response = await fetch("https://rhythm-forge-api.vercel.app/api/deliverables"); // API endpoint for all deliverables
         if (!response.ok) {
           throw new Error("Failed to fetch deliverables");
         }

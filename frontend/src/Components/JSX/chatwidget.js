@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import "../Styles/chatwidget.css";
 
-const socket = io("http://localhost:8080");
+const socket = io("https://rhythm-forge-api.vercel.app/");
 
 const ChatWidget = () => {
   const [message, setMessage] = useState("");
@@ -17,7 +17,7 @@ const ChatWidget = () => {
   // Fetch chat history only if it's empty
   const fetchChatHistory = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/chat/history?userType=${userType}`);
+      const response = await fetch(`https://rhythm-forge-api.vercel.app/chat/history?userType=${userType}`);
       const data = await response.json();
       if (data.success) {
         setMessages(data.messages);  // Store fetched messages

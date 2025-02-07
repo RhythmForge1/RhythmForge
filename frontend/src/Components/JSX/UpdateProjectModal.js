@@ -34,7 +34,7 @@ const UpdateProjectModal = ({ isOpen, onClose }) => {
   useEffect(() => {
     const fetchProjectCodes = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/projects");
+        const response = await axios.get("https://rhythm-forge-api.vercel.app/api/projects");
         if (Array.isArray(response.data)) {
           const codes = response.data.map((project) => project.projectCode);
           setProjectCodes(codes);
@@ -63,7 +63,7 @@ const UpdateProjectModal = ({ isOpen, onClose }) => {
       }
     try {
       const response = await axios.patch(
-        `http://localhost:8080/api/projects/${selectedProject}/update`,        
+        `https://rhythm-forge-api.vercel.app/api/projects/${selectedProject}/update`,        
         {
             shortDescription,
             detailedDescription,

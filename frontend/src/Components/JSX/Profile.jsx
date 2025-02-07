@@ -21,7 +21,7 @@ const Profile = () => {
       try {
         const userDetails = JSON.parse(localStorage.getItem("userDetails"));
         const token = userDetails?.jwtToken;
-        const response = await axios.get("http://localhost:8080/api/profile/", {
+        const response = await axios.get("https://rhythm-forge-api.vercel.app/api/profile/", {
           headers: { Authorization: `${token}` },
         });
 
