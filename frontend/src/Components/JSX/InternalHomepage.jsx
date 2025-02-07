@@ -47,7 +47,7 @@ const InternalHomepage = () => {
   useEffect(() => {
     // Fetch project codes from API
     axios
-      .get("http://localhost:8080/api/projects")
+      .get("https://rhythm-forge-api.vercel.app/api/projects")
       .then((response) => {
         setProjectCodes(response.data.map((project) => project.projectCode)); // Extract only project codes
       })
@@ -58,7 +58,7 @@ const InternalHomepage = () => {
    // Fetch teams from the backend
    const fetchTeams = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/get-teams");
+      const response = await axios.get("https://rhythm-forge-api.vercel.app/api/get-teams");
       setTeams(response.data.slice(0, 5)); // Display only up to 3 teams
     } catch (err) {
       console.error("Error fetching teams:", err.message);
@@ -69,7 +69,7 @@ const InternalHomepage = () => {
       const fetchProjects = async () => {
         try {
           // Fetch project details (Stages, Status, Severity, Date)
-          const projectResponse = await fetch("http://localhost:8080/api/projects");
+          const projectResponse = await fetch("https://rhythm-forge-api.vercel.app/api/projects");
           const projectData = await projectResponse.json();
     
           // Updated projects with team size based on 'members' count
@@ -144,10 +144,10 @@ const InternalHomepage = () => {
     // Fetch backlog projects (where all stages are pending)
     const fetchBacklogData  = async () => {
       try {
-        const projectsResponse = await fetch('http://localhost:8080/api/projects'); // Replace with the actual projects API endpoint
+        const projectsResponse = await fetch('https://rhythm-forge-api.vercel.app/api/projects'); // Replace with the actual projects API endpoint
         const projectsData = await projectsResponse.json();
   
-        const teamsResponse = await fetch('http://localhost:8080/api/get-teams'); // Replace with the actual teams API endpoint
+        const teamsResponse = await fetch('https://rhythm-forge-api.vercel.app/api/get-teams'); // Replace with the actual teams API endpoint
         const teamsData = await teamsResponse.json();
   
         // Filter projects where all stages are pending
@@ -181,7 +181,7 @@ const InternalHomepage = () => {
   const handleAddTeam = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/add-team", formData);
+      const response = await axios.post("https://rhythm-forge-api.vercel.app/api/add-team", formData);
       setTeams([...teams, response.data.team].slice(0, 5)); // Add the new team and limit to 3
       setFormData({
         name: "",
@@ -288,7 +288,7 @@ const handleAttachmentUpload = async (category) => {
     formData.append("projectId", selectedProject.id);
 
     try {
-      const response = await fetch("http://localhost:8080/api/attachments/upload", {
+      const response = await fetch("https://rhythm-forge-api.vercel.app/api/attachments/upload", {
         method: "POST",
         body: formData,
       });
@@ -311,7 +311,7 @@ const handleAttachmentDelete = async (category) => {
   if (!attachmentToDelete) return;
 
   try {
-    const response = await fetch(`http://localhost:8080/api/attachments/${attachmentToDelete._id}`, {
+    const response = await fetch(`https://rhythm-forge-api.vercel.app/api/attachments/${attachmentToDelete._id}`, {
       method: "DELETE",
     });
 
@@ -326,7 +326,7 @@ const handleAttachmentDelete = async (category) => {
 };
  // Fetch attachments from API
  useEffect(() => {
-  fetch("http://localhost:8080/api/attachments")
+  fetch("https://rhythm-forge-api.vercel.app/api/attachments")
     .then((response) => response.json())
     .then((data) => setAttachments(data || [])) // Ensuring it is always an array
     .catch((error) => console.error("Error fetching attachments:", error));
@@ -335,7 +335,7 @@ const handleAttachmentDelete = async (category) => {
 const handleAttachmentPopup = (project) => {
   setSelectedProject(project);
   
-  fetch(`http://localhost:8080/api/attachments/${project.projectId}`)
+  fetch(`https://rhythm-forge-api.vercel.app/api/attachments/${project.projectId}`)
     .then((response) => response.json())
     .then((data) => {
       if (Array.isArray(data)) {
@@ -360,7 +360,7 @@ const handleClosePopup = () => {
 };
 
 const handleDelete = (id) => {
-  fetch(`http://localhost:8080/api/attachments/${id}`, { method: "DELETE" })
+  fetch(`https://rhythm-forge-api.vercel.app/api/attachments/${id}`, { method: "DELETE" })
     .then((res) => res.json())
     .then(() => {
       setAttachments(attachments.filter((att) => att._id !== id));
@@ -368,7 +368,7 @@ const handleDelete = (id) => {
     .catch((error) => console.error("Error deleting file:", error));
 };
 const handleShare = (filePath) => {
-  const fileUrl = `http://localhost:8080/${filePath}`;
+  const fileUrl = `https://rhythm-forge-api.vercel.app/${filePath}`;
   navigator.clipboard.writeText(fileUrl)
     .then(() => alert("Link copied to clipboard!"))
     .catch((err) => console.error("Error copying link:", err));
@@ -799,14 +799,14 @@ const handleShare = (filePath) => {
           <td><strong>{attachment.projectId}</strong></td>
           <td>{attachment.stageName}</td>
           <td>
-            <a href={`http://localhost:8080/${attachment.filePath}`} target="_blank" rel="noopener noreferrer">
+            <a href={`https://rhythm-forge-api.vercel.app/${attachment.filePath}`} target="_blank" rel="noopener noreferrer">
               {attachment.fileName}
             </a>
           </td>
           <td>{new Date(attachment.uploadedAt).toLocaleString()}</td>
           <td>
             <button onClick={() => handleDelete(attachment._id)}>🗑️</button>
-            <a href={`http://localhost:8080/${attachment.filePath}`} download={attachment.fileName}>
+            <a href={`https://rhythm-forge-api.vercel.app/${attachment.filePath}`} download={attachment.fileName}>
               📥
             </a>
             <button onClick={() => handleShare(attachment.filePath)}>📤</button>
