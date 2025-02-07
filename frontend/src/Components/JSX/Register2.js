@@ -57,7 +57,7 @@ const RegisterPage2 = () => {
     }
 
     try {
-      const url = `http://localhost:8080/auth/signup`;
+      const url = `https://rhythm-forge-api.vercel.app/auth/signup`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
