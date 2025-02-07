@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 8080;
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // Allow requests from your frontend
+    origin: "https://rhythm-forge-api.vercel.app/", // Allow requests from your frontend
     methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -52,7 +52,7 @@ app.use("/api/attachments", attachmentRoutes)
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000", // Adjust this to match your frontend's origin
+    origin: "https://rhythm-forge-api.vercel.app/", // Adjust this to match your frontend's origin
     methods: ["GET", "POST"],
   },
 });
